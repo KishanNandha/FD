@@ -1,0 +1,22 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['username']))
+		header('location:http://localhost/FD/views/login_view.php');
+	$con=mysqli_connect('localhost','root');
+	mysqli_select_db($con,'FD');
+	$id=$_POST['id'];
+	$bank=$_POST['bank'];
+	$acno=$_POST['acno'];
+	$term=$_POST['term'];
+	$intrest=$_POST['intrest'];
+	$pri_amt=$_POST['pri_amt'];
+	$mat_value=$_POST['mat_value'];
+	$value_date=$_POST['value_date'];
+	$mat_date=$_POST['mat_date'];
+	$tablename=$_SESSION['username'];
+	$q="update table".$tablename."set bank='$bank',acno=$acno,term=$term,intrest=$intrest,pri_amt=$pri_amt,mat_value=$mat_value,value_date='$value_date',mat_date='$mat_date' where id=
+	$id";
+    mysqli_query($con,$q);
+	mysqli_close($con);
+	header('location:http://localhost/FD/views/update_view.php');
+?>

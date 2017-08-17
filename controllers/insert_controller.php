@@ -1,0 +1,20 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['username']))
+		header('location:http://localhost/FD/views/login_view.php');
+	$bank=$_POST['bank'];
+	$acno=$_POST['acno'];
+	$term=$_POST['term'];
+	$intrest=$_POST['intrest'];
+	$pri_amt=$_POST['pri_amt'];
+	$mat_value=$_POST['mat_value'];
+	$tablename=$_SESSION['username'];
+	$value_date=$_POST['value_date'];
+	$mat_date=$_POST['mat_date'];
+	$con=mysqli_connect('localhost','root');
+	mysqli_select_db($con,'FD');
+	$q="insert into table".$tablename."(bank,acno,term,intrest,pri_amt,mat_value,value_date,mat_date) values('$bank',$acno,$term,$intrest,$pri_amt,$mat_value,'$value_date','$mat_date')";
+	$num=mysqli_query($con,$q);
+	mysqli_close($con);
+	header('location:http://localhost/FD/views/viewdata_view.php');
+?>
